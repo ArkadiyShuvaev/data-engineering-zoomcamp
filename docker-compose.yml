@@ -1,0 +1,41 @@
+services:
+  notebook:
+    image: quay.io/jupyter/minimal-notebook:latest
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+    links:
+      - db
+    volumes:
+      - .:/home/jovyan/work:cached
+    # env_file:
+    #   - ./notebook/.env
+    #   - ./notebook/.env.dev
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+      - JUPYTER_TOKEN=easy
+      - CHOWN_EXTRA=/home/jovyan/work
+      - CHOWN_EXTRA_OPTS=-R
+    user: root
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 1g
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=P@ssw0rd!
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      # - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+volumes:
+  db_data:
