@@ -32,7 +32,10 @@
         "ms-toolsai.vscode-jupyter-slideshow",
         "ms-python.autopep8",
         "ms-python.pylint",
-        "ms-toolsai.vscode-jupyter-powertoys"
+        "ms-toolsai.vscode-jupyter-powertoys",
+        "mk12.better-git-line-blame",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory"
       ]
     }
   },
