@@ -39,5 +39,14 @@ services:
       - db_data:/var/lib/postgresql/data
       - ./scripts:/docker-entrypoint-initdb.d
 
+  data_loader:
+    depends_on:
+      - db
+    build:
+      context: ./data_loader
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=P@ssw0rd!
+
 volumes:
   db_data:
