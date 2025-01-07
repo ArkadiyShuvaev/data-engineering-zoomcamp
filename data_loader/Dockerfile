@@ -4,7 +4,9 @@ FROM python:3.12
 # Set the working directory in the container
 WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
-COPY ./data_loader.py /app/data_loader.py
+COPY ./data_loader/data_loader.py /app/data_loader.py
+
+ENV PYTHONUNBUFFERED=1
 
 RUN pip install -r requirements.txt
 

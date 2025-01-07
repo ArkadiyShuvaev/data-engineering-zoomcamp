@@ -43,7 +43,8 @@ services:
     depends_on:
       - db
     build:
-      context: ./data_loader
+      context: .
+      dockerfile: ./data_loader/Dockerfile
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=P@ssw0rd!
