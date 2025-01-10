@@ -46,6 +46,13 @@ services:
       context: .
       dockerfile: ./data_loader/Dockerfile
     environment:
+      - FILE_URL=https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-09.parquet
+      - DB_TABLE_NAME=green_tripdata_2019_09
+      - DB_NAME=ny_taxi
+      - DB_HOST_NAME=db
+      - DB_PORT=5432
+      - DB_USER_NAME=postgres
+      - DB_PASSWORD=P@ssw0rd!
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=P@ssw0rd!
 
