@@ -10,7 +10,8 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind,consistency=cached",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws/credentials,target=/home/jovyan/.aws/credentials,type=bind",
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache,target=/home/jovyan/.cache,type=bind"
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache,target=/home/jovyan/.cache,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/jovyan/.ssh,type=bind"
   ],
   "customizations": {
     "vscode": {
@@ -38,6 +39,9 @@
         "donjayamanne.githistory"
       ]
     }
+  },
+  "features": {
+      "ghcr.io/devcontainers-extra/features/terraform-asdf:2": {}
   },
   "postCreateCommand": "pip install -U --user -r requirements.txt",
   "containerEnv": {
