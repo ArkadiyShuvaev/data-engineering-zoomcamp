@@ -47,7 +47,9 @@ services:
       dockerfile: ./data_loader/Dockerfile
     environment:
       - FILE_URL=https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-10.parquet
+      - FILE_TAXI_ZONES_URL=https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
       - DB_TABLE_NAME=green_tripdata_2019_10
+      - DB_TAXI_ZONES_TABLE_NAME=taxi_zones
       - DB_NAME=ny_taxi
       - DB_HOST_NAME=db
       - DB_PORT=5432

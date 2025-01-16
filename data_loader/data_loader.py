@@ -18,15 +18,29 @@ def main(params) -> int:
     table_name = params.db_table_name
     file_url = params.file_url
     user_name = params.db_user_name
+    file_taxi_zones_url = params.file_taxi_zones_url
+    taxi_zones_table_name = params.db_taxi_zones_table_name
 
     chunk_size = 100000
     downloaded_file_path = "/var/tmp/output.parquet"
+    downloaded_taxi_zones_file_path = "/var/tmp/output.csv"
 
     subprocess.run(["wget", "-O", downloaded_file_path, file_url], check=True)
+    subprocess.run(["wget", "-O", downloaded_taxi_zones_file_path, file_taxi_zones_url], check=True)
 
     encoded_password = quote_plus(password)
     engine = create_engine(
         f"postgresql://{user_name}:{encoded_password}@{host_name}:{db_port}/{db_name}")
+
+    print("Loading taxi zones data into PostgreSQL")
+    dtypes = {
+        "Zone": "string",
+        "LocationID": "Int64",
+        "Borough": "string"
+    }
+
+    ny_taxi_zones_df = pd.read_csv(downloaded_taxi_zones_file_path, usecols=["Zone", "LocationID", "Borough"], dtype=dtypes)
+    ny_taxi_zones_df.to_sql(taxi_zones_table_name, engine, if_exists="replace")
 
     print("Loading data into PostgreSQL")
     parquet_file = pq.ParquetFile(downloaded_file_path)
@@ -56,7 +70,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser("Ingest Data File into PostgreSQL")
     parser.add_argument("--file_url", help="URL of the data to be downloaded")
+    parser.add_argument("--file_taxi_zones_url", help="The URL of the taxi zones data to be downloaded")
     parser.add_argument("--db_table_name", help="The name of the table to be created")
+    parser.add_argument("--db_taxi_zones_table_name", help="The name of the table with taxi zones to be created")
     parser.add_argument("--db_name", help="The name of the database to be created")
     parser.add_argument("--db_host_name", help="The name of the host")
     parser.add_argument("--db_port", help="The port number of the database")
