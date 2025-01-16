@@ -41,7 +41,8 @@
     }
   },
   "features": {
-      "ghcr.io/devcontainers-extra/features/terraform-asdf:2": {}
+      "ghcr.io/devcontainers-extra/features/terraform-asdf:2": {},
+      "ghcr.io/dhoeric/features/google-cloud-cli:1": {}
   },
   "postCreateCommand": "pip install -U --user -r requirements.txt",
   "containerEnv": {
