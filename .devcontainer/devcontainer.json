@@ -11,7 +11,8 @@
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws/credentials,target=/home/jovyan/.aws/credentials,type=bind",
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache,target=/home/jovyan/.cache,type=bind",
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/jovyan/.ssh,type=bind"
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/jovyan/.ssh,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config,target=/home/jovyan/.config,type=bind"
   ],
   "customizations": {
     "vscode": {
@@ -36,7 +37,8 @@
         "ms-toolsai.vscode-jupyter-powertoys",
         "mk12.better-git-line-blame",
         "mhutchie.git-graph",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "hashicorp.terraform"
       ]
     }
   },
@@ -48,6 +50,7 @@
   "containerEnv": {
   },
   "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/jovyan/.local/bin"
+    "PATH": "${containerEnv:PATH}:/home/jovyan/.local/bin",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/home/jovyan/.config/gcp/clean-sequencer-447616-m4-7ce30c4e5948.json"
   }
 }
